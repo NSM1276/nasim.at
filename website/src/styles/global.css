@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/* Design tokens. Changing a value here changes it site-wide.
+   Palette is a starting point and is reviewed on the Vercel preview URL
+   before content work begins (WEBSITE_PLAN.md, open question 6). */
+@theme {
+  /* Neutrals: cool near-black through off-white */
+  --color-ink-950: #070A0E;
+  --color-ink-900: #0E131A;
+  --color-ink-800: #1A2230;
+  --color-ink-700: #2B3648;
+  --color-ink-500: #5A6B82;
+  --color-ink-400: #8493A8;
+  --color-ink-300: #AFBCCC;
+  --color-ink-200: #D7DFE9;
+  --color-ink-100: #EAF0F6;
+  --color-ink-50:  #F6F9FC;
+
+  /* Accent: teal-green, reads as "secure" and "live data" */
+  --color-accent-700: #0B7A61;
+  --color-accent-600: #0F9476;
+  --color-accent-500: #17B890;
+  --color-accent-400: #35D5AC;
+  --color-accent-300: #7BE9CB;
+
+  /* Signal colour for the crossed-out "to the internet" arrow */
+  --color-alert-500: #E2574C;
+
+  --font-sans: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Consistent vertical rhythm between landing page sections.
+   A plain class rather than a spacing token, so it works regardless of
+   Tailwind's spacing-namespace behaviour. */
+.section-y {
+  padding-block: 4.5rem;
+}
+
+@media (min-width: 640px) {
+  .section-y {
+    padding-block: 6.5rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-ink-50);
+  color: var(--color-ink-900);
+  font-family: var(--font-sans);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Visible keyboard focus everywhere, required for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-accent-600);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
