@@ -38,13 +38,17 @@ npm run check    # TypeScript / Astro diagnostics
 
 ## Deployment
 
-**No dashboard configuration is required.** Everything Vercel needs lives in
-[`vercel.json`](vercel.json) at the repository root: how to install, how to build, and
-which folder to serve. Keeping it in git means the deploy is reproducible and reviewable,
-and nobody has to remember a setting buried in a web UI.
+Vercel project `website`, linked to this repository, Root Directory `website`.
+Every push to `main` deploys to production; every other branch gets its own preview URL.
 
-Vercel project: `nasim-at`, linked to this repository. Every push to `main` deploys to
-production; every push to any other branch gets its own preview URL.
+**Build configuration lives in [`website/vercel.json`](website/vercel.json), not in the
+dashboard.** Values in that file take precedence over the project settings in Vercel's web
+UI, which keeps the deploy reproducible from the repository alone. It deliberately pins
+`installCommand`, `buildCommand` and `outputDirectory` so a stale override stored in the
+dashboard cannot break the build. All paths in it are relative to the Root Directory.
+
+The custom domain `nasim.at` is **not** attached yet. Until it is, the site lives on the
+Vercel project URL only.
 
 ## Language handling
 
