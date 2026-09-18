@@ -1,5 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+
+  "//": "These three keys intentionally override whatever is stored in the Vercel project settings. vercel.json wins over the dashboard, which keeps the deploy reproducible from the repository alone. Paths are relative to the Root Directory (website/).",
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+
   "headers": [
     {
       "source": "/(.*)",
