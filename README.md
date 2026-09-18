@@ -7,6 +7,17 @@ No cloud, no video storage. Vienna, Austria.
 - Website plan: [`WEBSITE_PLAN.md`](WEBSITE_PLAN.md)
 - Implementation plans: [`docs/superpowers/plans/`](docs/superpowers/plans/)
 
+## History note
+
+Before 18 September 2026 this repository held a different site, the personal business page
+"Nasim Nuridinov — Webseiten für kleine Unternehmen in Wien". On the owner's instruction it
+was replaced by Nasim Vision. **Nothing was lost:** those 30 commits are preserved on the
+`old-site` branch and can be restored at any time.
+
+```bash
+git checkout old-site        # inspect the previous site
+```
+
 ## Repository layout
 
 | Path | Contents |
