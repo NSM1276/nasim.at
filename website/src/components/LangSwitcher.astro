@@ -1,0 +1,36 @@
+---
+import { getLangFromUrl, useTranslations, getAlternates } from '../i18n/utils';
+import { languages } from '../i18n/ui';
+import type { RouteKey } from '../i18n/routes';
+
+interface Props {
+  route: RouteKey;
+}
+
+const { route } = Astro.props;
+const current = getLangFromUrl(Astro.url);
+const t = useTranslations(current);
+const alternates = getAlternates(route);
+---
+
+<nav aria-label={t('lang.label')} class="flex items-center gap-1 text-sm">
+  {alternates.map((alt, index) => (
+    <>
+      {index > 0 && <span aria-hidden="true" class="text-ink-300">/</span>}
+      <a
+        href={alt.path}
+        hreflang={alt.lang}
+        aria-current={alt.lang === current ? 'true' : undefined}
+        class:list={[
+          'rounded px-1.5 py-1 uppercase tracking-wide transition-colors',
+          alt.lang === current
+            ? 'font-semibold text-ink-900'
+            : 'text-ink-500 hover:text-ink-900',
+        ]}
+      >
+        <span class="sr-only">{languages[alt.lang]}</span>
+        <span aria-hidden="true">{alt.lang}</span>
+      </a>
+    </>
+  ))}
+</nav>

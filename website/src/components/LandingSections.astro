@@ -1,0 +1,28 @@
+---
+import Hero from './Hero.astro';
+import Section from './Section.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Section order matches WEBSITE_PLAN.md §4, blocks 2-10.
+const sections = [
+  { id: 'problem', title: t('problem.title'), lead: t('problem.lead'), tone: 'light' },
+  { id: 'how', title: t('how.title'), lead: t('how.lead'), tone: 'light' },
+  { id: 'privacy', title: t('privacy.title'), lead: t('privacy.lead'), tone: 'dark' },
+  { id: 'dashboard', title: t('dashboard.title'), lead: t('dashboard.lead'), tone: 'light' },
+  { id: 'audience', title: t('audience.title'), lead: t('audience.lead'), tone: 'light' },
+  { id: 'pricing', title: t('pricing.title'), lead: t('pricing.lead'), tone: 'light' },
+  { id: 'about', title: t('about.title'), lead: t('about.lead'), tone: 'light' },
+  { id: 'contact', title: t('contact.title'), lead: t('contact.lead'), tone: 'dark' },
+] as const;
+---
+
+<Hero />
+
+{sections.map((section) => (
+  <Section id={section.id} title={section.title} lead={section.lead} tone={section.tone}>
+    <p class="text-sm italic text-ink-400">{t('placeholder.notice')}</p>
+  </Section>
+))}

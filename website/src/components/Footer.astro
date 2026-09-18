@@ -1,0 +1,27 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { routePath } from '../i18n/routes';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-ink-200 bg-ink-100/60">
+  <div
+    class="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-10 text-sm text-ink-500 sm:flex-row sm:items-center sm:justify-between"
+  >
+    <p>
+      &copy; {year} {t('site.name')}. {t('footer.rights')}
+      <span class="hidden sm:inline">{t('footer.madein')}</span>
+    </p>
+    <nav aria-label={t('footer.imprint')} class="flex gap-5">
+      <a href={routePath('imprint', lang)} class="transition-colors hover:text-ink-900">
+        {t('footer.imprint')}
+      </a>
+      <a href={routePath('privacy', lang)} class="transition-colors hover:text-ink-900">
+        {t('footer.privacy')}
+      </a>
+    </nav>
+  </div>
+</footer>

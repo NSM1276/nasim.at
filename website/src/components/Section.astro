@@ -1,0 +1,35 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  lead?: string;
+  tone?: 'light' | 'dark';
+}
+
+const { id, title, lead, tone = 'light' } = Astro.props;
+---
+
+<section
+  id={id}
+  class:list={[
+    'section-y scroll-mt-20',
+    tone === 'dark' ? 'bg-ink-900 text-ink-100' : 'bg-ink-50 text-ink-900',
+  ]}
+>
+  <div class="mx-auto max-w-6xl px-5">
+    <h2 class="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h2>
+    {lead && (
+      <p
+        class:list={[
+          'mt-4 max-w-2xl text-lg text-pretty',
+          tone === 'dark' ? 'text-ink-300' : 'text-ink-500',
+        ]}
+      >
+        {lead}
+      </p>
+    )}
+    <div class="mt-10">
+      <slot />
+    </div>
+  </div>
+</section>

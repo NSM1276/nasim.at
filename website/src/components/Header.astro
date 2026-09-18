@@ -1,0 +1,52 @@
+---
+import LangSwitcher from './LangSwitcher.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { routePath, type RouteKey } from '../i18n/routes';
+
+interface Props {
+  route: RouteKey;
+}
+
+const { route } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const home = routePath('home', lang);
+
+// In-page anchors only resolve on the landing page; elsewhere they are
+// prefixed with the home path so the link still works.
+const anchor = (id: string) => (route === 'home' ? `#${id}` : `${home}#${id}`);
+
+const navItems = [
+  { href: anchor('how'), label: t('nav.how') },
+  { href: anchor('privacy'), label: t('nav.privacy') },
+  { href: anchor('pricing'), label: t('nav.pricing') },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-ink-200/70 bg-ink-50/85 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4">
+    <a href={home} class="flex items-center gap-2 font-semibold tracking-tight text-ink-900">
+      <span
+        aria-hidden="true"
+        class="inline-block h-2.5 w-2.5 rounded-full bg-accent-500"
+      ></span>
+      {t('site.name')}
+    </a>
+
+    <nav aria-label={t('nav.how')} class="hidden items-center gap-6 text-sm text-ink-500 md:flex">
+      {navItems.map((item) => (
+        <a href={item.href} class="transition-colors hover:text-ink-900">{item.label}</a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <LangSwitcher route={route} />
+      <a
+        href={anchor('contact')}
+        class="rounded-lg bg-ink-900 px-4 py-2 text-sm font-medium text-ink-50 transition-colors hover:bg-ink-800"
+      >
+        {t('nav.cta')}
+      </a>
+    </div>
+  </div>
+</header>

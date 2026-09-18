@@ -1,0 +1,48 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Placeholder. Replaced with the real number in a later plan
+// (WEBSITE_PLAN.md, open question 3).
+const WHATSAPP_URL = 'https://wa.me/0000000000';
+---
+
+<section class="bg-ink-50 pt-16 pb-20 sm:pt-24 sm:pb-28">
+  <div class="mx-auto max-w-6xl px-5">
+    <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent-600">
+      {t('site.tagline')}
+    </p>
+    <h1 class="mt-5 max-w-3xl text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
+      {t('hero.title')}
+    </h1>
+    <p class="mt-6 max-w-2xl text-pretty text-lg text-ink-500 sm:text-xl">
+      {t('hero.subtitle')}
+    </p>
+
+    <div class="mt-9 flex flex-wrap gap-3">
+      <a
+        href="#contact"
+        class="rounded-lg bg-ink-900 px-6 py-3 font-medium text-ink-50 transition-colors hover:bg-ink-800"
+      >
+        {t('hero.cta.primary')}
+      </a>
+      <a
+        href={WHATSAPP_URL}
+        rel="noopener noreferrer"
+        target="_blank"
+        class="rounded-lg border border-ink-300 bg-white px-6 py-3 font-medium text-ink-900 transition-colors hover:border-ink-400"
+      >
+        {t('hero.cta.whatsapp')}
+      </a>
+    </div>
+
+    <!-- Dashboard mockup lands here in a later plan (WEBSITE_PLAN.md §5). -->
+    <div
+      class="mt-16 flex aspect-[16/9] w-full items-center justify-center rounded-2xl border border-dashed border-ink-300 bg-ink-100 text-sm text-ink-400"
+    >
+      Dashboard-Mockup
+    </div>
+  </div>
+</section>

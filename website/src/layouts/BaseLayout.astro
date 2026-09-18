@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+import '@fontsource-variable/inter';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getLangFromUrl, useTranslations, getAlternates, absoluteUrl } from '../i18n/utils';
+import type { RouteKey } from '../i18n/routes';
+import type { UIKey } from '../i18n/ui';
+
+interface Props {
+  route: RouteKey;
+  titleKey: UIKey;
+  descriptionKey: UIKey;
+}
+
+const { route, titleKey, descriptionKey } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const alternates = getAlternates(route);
+const canonical = absoluteUrl(Astro.url.pathname, Astro.site);
+const title = t(titleKey);
+const description = t(descriptionKey);
+---
+
+<!doctype html>
+<html lang={lang === 'de' ? 'de-AT' : 'en'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    {alternates.map((alt) => (
+      <link
+        rel="alternate"
+        hreflang={alt.lang === 'de' ? 'de-AT' : 'en'}
+        href={absoluteUrl(alt.path, Astro.site)}
+      />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={absoluteUrl('/', Astro.site)} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'de' ? 'de_AT' : 'en_US'} />
+    <meta property="og:site_name" content={t('site.name')} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+
+  <body class="min-h-screen flex flex-col bg-ink-50 text-ink-900">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-ink-900 focus:px-4 focus:py-2 focus:text-ink-50"
+    >
+      {t('skip.content')}
+    </a>
+
+    <Header route={route} />
+
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>
