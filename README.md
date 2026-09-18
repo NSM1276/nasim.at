@@ -36,17 +36,15 @@ npm test         # unit tests
 npm run check    # TypeScript / Astro diagnostics
 ```
 
-## Website: Vercel setup
+## Deployment
 
-Done once, in the Vercel dashboard:
+**No dashboard configuration is required.** Everything Vercel needs lives in
+[`vercel.json`](vercel.json) at the repository root: how to install, how to build, and
+which folder to serve. Keeping it in git means the deploy is reproducible and reviewable,
+and nobody has to remember a setting buried in a web UI.
 
-1. Import the GitHub repository.
-2. **Settings → General → Root Directory**: set to `website`.
-3. Framework preset: Astro (auto-detected). Leave build and output settings unchanged.
-4. Deploy.
-
-After that, every push to `main` deploys to production and every push to any other
-branch gets its own preview URL.
+Vercel project: `nasim-at`, linked to this repository. Every push to `main` deploys to
+production; every push to any other branch gets its own preview URL.
 
 ## Language handling
 

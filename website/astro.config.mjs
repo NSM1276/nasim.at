@@ -2,16 +2,14 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
-import vercel from '@astrojs/vercel';
 
 // Placeholder domain. Replace once the real domain is registered
 // (WEBSITE_PLAN.md, open question 1).
-const SITE = 'https://nasimvision.at';
+const SITE = 'https://nasim.at';
 
 export default defineConfig({
   site: SITE,
   output: 'static',
-  adapter: vercel(),
   i18n: {
     defaultLocale: 'de',
     locales: ['de', 'en'],

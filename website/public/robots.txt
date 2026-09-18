@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nasimvision.at/sitemap-index.xml
+Sitemap: https://nasim.at/sitemap-index.xml
