@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Astro build output
+website/dist/
+website/.astro/
+website/.vercel/
+
+# Python (box/)
+box/__pycache__/
+box/.venv/
+box/*.db
+*.pyc
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
