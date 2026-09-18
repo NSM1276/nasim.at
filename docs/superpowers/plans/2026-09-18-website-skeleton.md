@@ -1,5 +1,23 @@
 # Nasim Vision Website Skeleton — Implementation Plan
 
+> **Status: executed 2026-09-18.** Tasks 1-12 are complete and committed. Task 13 stops at
+> Step 3: the GitHub remote and first push are still pending because the repository does not
+> exist yet. Everything else is verified locally.
+>
+> **Deviations from the plan as written:**
+> - Astro installed as **7.3.3**, not 5. The i18n config, sitemap integration and Vercel
+>   adapter APIs used here are unchanged in 7.
+> - `@astrojs/check` and `typescript` had to be installed explicitly, because `astro check`
+>   otherwise prompts interactively.
+> - The Astro scaffold wrote its own `website/CLAUDE.md`, `website/AGENTS.md` and
+>   `website/README.md`. All three were removed in favour of the repository-root versions.
+> - `npm run check` was added as a script alias.
+> - Tailwind 4 tree-shakes unused theme variables, so the Task 2 verification was corrected
+>   to grep for a token the test markup actually uses.
+> - One defect found during browser testing and fixed: at 375 px the header logo and the
+>   call-to-action button each wrapped onto two lines. The logo is now `whitespace-nowrap`
+>   and the button is hidden below 420 px, where the hero repeats it.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build a deployable bilingual (DE/EN) Astro skeleton for the Nasim Vision landing page, with design tokens, working language switching, legally required pages, SEO metadata, and a live Vercel deploy.
