@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LegalPage from '../components/LegalPage.astro';
+---
+
+<BaseLayout route="privacy" titleKey="meta.privacy.title" descriptionKey="meta.privacy.description">
+  <LegalPage heading="Datenschutzerklärung">
+    <p>
+      Diese Erklärung beschreibt, welche personenbezogenen Daten beim Besuch dieser Website
+      verarbeitet werden. Verantwortlich ist die im Impressum genannte Stelle.
+    </p>
+
+    <h2>Keine Cookies, kein Tracking</h2>
+    <p>
+      Diese Website setzt keine Cookies und bindet keine Dienste Dritter ein. Schriftarten werden
+      vom eigenen Server ausgeliefert, nicht von einem externen Anbieter.
+    </p>
+
+    <h2>Server-Logdateien</h2>
+    <p>
+      Der Hosting-Anbieter erhebt technisch notwendige Zugriffsdaten wie IP-Adresse, Zeitpunkt der
+      Anfrage und aufgerufene Seite. Rechtsgrundlage ist das berechtigte Interesse am sicheren
+      Betrieb der Website gemäß Art. 6 Abs. 1 lit. f DSGVO.
+    </p>
+
+    <h2>Kontaktanfragen</h2>
+    <p>
+      Wenn Sie uns über das Kontaktformular oder per WhatsApp schreiben, verarbeiten wir die von
+      Ihnen angegebenen Daten ausschließlich zur Bearbeitung Ihrer Anfrage. Rechtsgrundlage ist
+      Art. 6 Abs. 1 lit. b DSGVO. Wir löschen diese Daten, sobald sie nicht mehr benötigt werden,
+      spätestens nach [Aufbewahrungsfrist].
+    </p>
+
+    <h2>Ihre Rechte</h2>
+    <p>
+      Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung,
+      Datenübertragbarkeit und Widerspruch. Wenden Sie sich dazu an die im Impressum genannte
+      Adresse. Außerdem können Sie sich bei der Österreichischen Datenschutzbehörde beschweren.
+    </p>
+
+    <h2>Hinweis zum Produkt Nasim Vision</h2>
+    <p>
+      Diese Erklärung betrifft ausschließlich diese Website. Das Produkt selbst speichert keine
+      Videoaufnahmen und führt keine Gesichtserkennung durch. Es verarbeitet ausschließlich
+      anonyme Zählwerte auf einem Gerät im Betrieb des Kunden.
+    </p>
+
+    <p class="text-sm text-ink-500">Stand: [Datum]</p>
+  </LegalPage>
+</BaseLayout>

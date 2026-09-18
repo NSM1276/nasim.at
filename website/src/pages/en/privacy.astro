@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LegalPage from '../../components/LegalPage.astro';
+---
+
+<BaseLayout route="privacy" titleKey="meta.privacy.title" descriptionKey="meta.privacy.description">
+  <LegalPage heading="Privacy Policy">
+    <p>
+      This policy describes which personal data is processed when you visit this website. The
+      controller is the entity named in the imprint.
+    </p>
+
+    <h2>No cookies, no tracking</h2>
+    <p>
+      This website sets no cookies and embeds no third-party services. Fonts are served from our
+      own server, not from an external provider.
+    </p>
+
+    <h2>Server log files</h2>
+    <p>
+      The hosting provider collects technically necessary access data such as IP address, time of
+      request and page requested. The legal basis is our legitimate interest in the secure
+      operation of the website under Art. 6(1)(f) GDPR.
+    </p>
+
+    <h2>Contact requests</h2>
+    <p>
+      If you write to us through the contact form or via WhatsApp, we process the data you provide
+      solely to handle your enquiry. The legal basis is Art. 6(1)(b) GDPR. We delete this data once
+      it is no longer needed, at the latest after [retention period].
+    </p>
+
+    <h2>Your rights</h2>
+    <p>
+      You have the right to access, rectification, erasure, restriction of processing, data
+      portability and objection. Contact us at the address given in the imprint. You may also
+      lodge a complaint with the Austrian Data Protection Authority.
+    </p>
+
+    <h2>Note on the Nasim Vision product</h2>
+    <p>
+      This policy covers this website only. The product itself stores no video recordings and
+      performs no face recognition. It processes only anonymous counts on a device located on the
+      customer's premises.
+    </p>
+
+    <p class="text-sm text-ink-500">Last updated: [date]</p>
+  </LegalPage>
+</BaseLayout>

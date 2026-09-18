@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LegalPage from '../components/LegalPage.astro';
+---
+
+<BaseLayout route="imprint" titleKey="meta.imprint.title" descriptionKey="meta.imprint.description">
+  <LegalPage heading="Impressum">
+    <p>Offenlegung gemäß §25 Mediengesetz und Informationen gemäß §5 E-Commerce-Gesetz.</p>
+
+    <h2>Medieninhaber und Diensteanbieter</h2>
+    <p>
+      [Firmenwortlaut oder Vor- und Nachname]<br />
+      [Rechtsform]<br />
+      [Straße und Hausnummer]<br />
+      [PLZ] Wien, Österreich
+    </p>
+
+    <h2>Kontakt</h2>
+    <p>
+      Telefon: [Telefonnummer]<br />
+      E-Mail: [E-Mail-Adresse]
+    </p>
+
+    <h2>Unternehmensdaten</h2>
+    <p>
+      UID-Nummer: [ATU-Nummer oder „nicht umsatzsteuerpflichtig“]<br />
+      Firmenbuchnummer: [FN-Nummer oder „nicht eingetragen“]<br />
+      Firmenbuchgericht: [Gericht]<br />
+      Gewerbeaufsichtsbehörde: Magistratisches Bezirksamt [Bezirk]
+    </p>
+
+    <h2>Unternehmensgegenstand</h2>
+    <p>Entwicklung und Installation von Systemen zur Besucheranalyse.</p>
+
+    <h2>Online-Streitbeilegung</h2>
+    <p>
+      Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung bereit:
+      <a href="https://ec.europa.eu/consumers/odr" rel="noopener noreferrer" target="_blank">
+        ec.europa.eu/consumers/odr
+      </a>
+    </p>
+  </LegalPage>
+</BaseLayout>

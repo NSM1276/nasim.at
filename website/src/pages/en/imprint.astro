@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LegalPage from '../../components/LegalPage.astro';
+---
+
+<BaseLayout route="imprint" titleKey="meta.imprint.title" descriptionKey="meta.imprint.description">
+  <LegalPage heading="Imprint">
+    <p>Disclosure under §25 of the Austrian Media Act and §5 of the Austrian E-Commerce Act.</p>
+
+    <h2>Media owner and service provider</h2>
+    <p>
+      [Company name or first and last name]<br />
+      [Legal form]<br />
+      [Street and number]<br />
+      [Postal code] Vienna, Austria
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Phone: [phone number]<br />
+      Email: [email address]
+    </p>
+
+    <h2>Company details</h2>
+    <p>
+      VAT ID: [ATU number or "not subject to VAT"]<br />
+      Commercial register number: [FN number or "not registered"]<br />
+      Register court: [court]<br />
+      Trade supervisory authority: District Authority [district]
+    </p>
+
+    <h2>Business purpose</h2>
+    <p>Development and installation of visitor analytics systems.</p>
+
+    <h2>Online dispute resolution</h2>
+    <p>
+      The European Commission provides a platform for online dispute resolution:
+      <a href="https://ec.europa.eu/consumers/odr" rel="noopener noreferrer" target="_blank">
+        ec.europa.eu/consumers/odr
+      </a>
+    </p>
+  </LegalPage>
+</BaseLayout>
