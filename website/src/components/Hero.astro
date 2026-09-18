@@ -1,48 +1,56 @@
 ---
+import DashboardMock from './DashboardMock.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { CONTACT } from '../config';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-// Placeholder. Replaced with the real number in a later plan
-// (WEBSITE_PLAN.md, open question 3).
-const WHATSAPP_URL = 'https://wa.me/0000000000';
 ---
 
-<section class="bg-ink-50 pt-16 pb-20 sm:pt-24 sm:pb-28">
-  <div class="mx-auto max-w-6xl px-5">
-    <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent-600">
-      {t('site.tagline')}
-    </p>
-    <h1 class="mt-5 max-w-3xl text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
-      {t('hero.title')}
-    </h1>
-    <p class="mt-6 max-w-2xl text-pretty text-lg text-ink-500 sm:text-xl">
-      {t('hero.subtitle')}
-    </p>
+<section class="relative overflow-hidden bg-ink-50 pt-14 pb-20 sm:pt-20 sm:pb-28">
+  <!-- Soft accent wash behind the headline -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -top-40 -right-32 h-[30rem] w-[30rem] rounded-full bg-accent-400/12 blur-3xl"
+  ></div>
 
-    <div class="mt-9 flex flex-wrap gap-3">
-      <a
-        href="#contact"
-        class="rounded-lg bg-ink-900 px-6 py-3 font-medium text-ink-50 transition-colors hover:bg-ink-800"
-      >
-        {t('hero.cta.primary')}
-      </a>
-      <a
-        href={WHATSAPP_URL}
-        rel="noopener noreferrer"
-        target="_blank"
-        class="rounded-lg border border-ink-300 bg-white px-6 py-3 font-medium text-ink-900 transition-colors hover:border-ink-400"
-      >
-        {t('hero.cta.whatsapp')}
-      </a>
-    </div>
+  <div class="relative mx-auto max-w-6xl px-5">
+    <div class="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-14">
+      <div>
+        <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent-600">
+          {t('site.tagline')}
+        </p>
+        <h1 class="mt-5 text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
+          {t('hero.title')}
+        </h1>
+        <p class="mt-6 max-w-xl text-pretty text-lg text-ink-500 sm:text-xl">
+          {t('hero.subtitle')}
+        </p>
 
-    <!-- Dashboard mockup lands here in a later plan (WEBSITE_PLAN.md §5). -->
-    <div
-      class="mt-16 flex aspect-[16/9] w-full items-center justify-center rounded-2xl border border-dashed border-ink-300 bg-ink-100 text-sm text-ink-400"
-    >
-      Dashboard-Mockup
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href="#contact"
+            class="rounded-lg bg-ink-900 px-6 py-3.5 font-medium text-ink-50 transition-colors hover:bg-ink-800"
+          >
+            {t('hero.cta.primary')}
+          </a>
+          <a
+            href={CONTACT.whatsapp}
+            rel="noopener noreferrer"
+            target="_blank"
+            class="rounded-lg border border-ink-300 bg-white px-6 py-3.5 font-medium text-ink-900 transition-colors hover:border-ink-400"
+          >
+            {t('hero.cta.whatsapp')}
+          </a>
+        </div>
+
+        <p class="mt-5 text-sm text-ink-400">{t('hero.note')}</p>
+      </div>
+
+      <div>
+        <DashboardMock />
+        <p class="mt-3 text-center text-xs text-ink-400">{t('mock.caption')}</p>
+      </div>
     </div>
   </div>
 </section>

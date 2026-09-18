@@ -1,0 +1,91 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<figure class="rounded-2xl border border-ink-700 bg-ink-950/60 p-5 sm:p-8">
+  <!-- Below ~600px the labels inside the SVG would shrink to a few pixels, so the
+       diagram gets its own horizontal scroll instead of scaling down. The page
+       body itself never scrolls sideways. -->
+  <div class="-mx-1 overflow-x-auto px-1">
+  <svg
+    viewBox="0 0 680 300"
+    class="h-auto w-full min-w-[34rem]"
+    role="img"
+    aria-label={t('privacy.diagram.alt')}
+  >
+    <defs>
+      <marker id="nv-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-accent-400)" />
+      </marker>
+    </defs>
+
+    <!-- The venue -->
+    <rect x="16" y="82" width="430" height="150" rx="16"
+          fill="none" stroke="var(--color-ink-700)" stroke-dasharray="6 6" />
+    <text x="32" y="108" fill="var(--color-ink-400)" font-size="13" font-family="inherit">
+      {t('privacy.diagram.box')}
+    </text>
+
+    <!-- Camera -->
+    <g transform="translate(56,140)">
+      <rect width="112" height="58" rx="12" fill="var(--color-ink-800)" stroke="var(--color-ink-700)" />
+      <g transform="translate(20,18)" stroke="var(--color-accent-400)" stroke-width="1.8" fill="none" stroke-linecap="round">
+        <rect x="0" y="4" width="16" height="12" rx="2.5" />
+        <path d="M16 8.5l6-3.5v12l-6-3.5z" />
+      </g>
+      <text x="48" y="35" fill="var(--color-ink-200)" font-size="13" font-family="inherit">
+        {t('privacy.diagram.camera')}
+      </text>
+    </g>
+
+    <!-- Arrow camera -> box -->
+    <line x1="176" y1="169" x2="222" y2="169"
+          stroke="var(--color-accent-400)" stroke-width="2" marker-end="url(#nv-arrow)" />
+
+    <!-- The box -->
+    <g transform="translate(232,134)">
+      <rect width="134" height="70" rx="12" fill="var(--color-accent-600)" />
+      <text x="67" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="600" font-family="inherit">
+        Nasim Vision
+      </text>
+      <text x="67" y="50" text-anchor="middle" fill="var(--color-accent-300)" font-size="12" font-family="inherit">
+        47 · 366 · 20:00
+      </text>
+    </g>
+
+    <!-- Arrow box -> phone -->
+    <line x1="374" y1="169" x2="470" y2="169"
+          stroke="var(--color-accent-400)" stroke-width="2" marker-end="url(#nv-arrow)" />
+
+    <!-- Phone -->
+    <g transform="translate(482,120)">
+      <rect width="62" height="100" rx="12" fill="var(--color-ink-800)" stroke="var(--color-ink-700)" />
+      <rect x="10" y="14" width="42" height="56" rx="5" fill="var(--color-ink-900)" />
+      <text x="31" y="46" text-anchor="middle" fill="var(--color-accent-400)" font-size="17" font-weight="600" font-family="inherit">47</text>
+      <text x="31" y="90" text-anchor="middle" fill="var(--color-ink-400)" font-size="11" font-family="inherit">
+        {t('privacy.diagram.phone')}
+      </text>
+    </g>
+
+    <!-- Blocked path to the cloud -->
+    <line x1="299" y1="128" x2="299" y2="66"
+          stroke="var(--color-ink-700)" stroke-width="2" stroke-dasharray="5 5" />
+    <g transform="translate(246,16)">
+      <rect width="106" height="44" rx="12" fill="none" stroke="var(--color-ink-700)" stroke-dasharray="5 5" />
+      <text x="53" y="28" text-anchor="middle" fill="var(--color-ink-500)" font-size="13" font-family="inherit">
+        {t('privacy.diagram.cloud')}
+      </text>
+    </g>
+    <g stroke="var(--color-alert-500)" stroke-width="3" stroke-linecap="round">
+      <line x1="285" y1="83" x2="313" y2="111" />
+      <line x1="313" y1="83" x2="285" y2="111" />
+    </g>
+    <text x="330" y="103" fill="var(--color-alert-500)" font-size="13" font-weight="500" font-family="inherit">
+      {t('privacy.diagram.blocked')}
+    </text>
+  </svg>
+  </div>
+</figure>

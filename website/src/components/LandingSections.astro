@@ -1,28 +1,243 @@
 ---
 import Hero from './Hero.astro';
 import Section from './Section.astro';
+import Icon from './Icon.astro';
+import DashboardMock from './DashboardMock.astro';
+import PrivacyDiagram from './PrivacyDiagram.astro';
+import ContactForm from './ContactForm.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { CONTACT } from '../config';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Section order matches WEBSITE_PLAN.md §4, blocks 2-10.
-const sections = [
-  { id: 'problem', title: t('problem.title'), lead: t('problem.lead'), tone: 'light' },
-  { id: 'how', title: t('how.title'), lead: t('how.lead'), tone: 'light' },
-  { id: 'privacy', title: t('privacy.title'), lead: t('privacy.lead'), tone: 'dark' },
-  { id: 'dashboard', title: t('dashboard.title'), lead: t('dashboard.lead'), tone: 'light' },
-  { id: 'audience', title: t('audience.title'), lead: t('audience.lead'), tone: 'light' },
-  { id: 'pricing', title: t('pricing.title'), lead: t('pricing.lead'), tone: 'light' },
-  { id: 'about', title: t('about.title'), lead: t('about.lead'), tone: 'light' },
-  { id: 'contact', title: t('contact.title'), lead: t('contact.lead'), tone: 'dark' },
+const problems = [
+  { icon: 'gauge', title: t('problem.1.title'), body: t('problem.1.body') },
+  { icon: 'calendar', title: t('problem.2.title'), body: t('problem.2.body') },
+  { icon: 'target', title: t('problem.3.title'), body: t('problem.3.body') },
+] as const;
+
+const steps = [
+  { icon: 'plug', title: t('how.1.title'), body: t('how.1.body') },
+  { icon: 'pencil', title: t('how.2.title'), body: t('how.2.body') },
+  { icon: 'smartphone', title: t('how.3.title'), body: t('how.3.body') },
+] as const;
+
+const privacyPoints = [
+  { icon: 'video-off', title: t('privacy.1.title'), body: t('privacy.1.body') },
+  { icon: 'eye-off', title: t('privacy.2.title'), body: t('privacy.2.body') },
+  { icon: 'lock', title: t('privacy.3.title'), body: t('privacy.3.body') },
+] as const;
+
+const dashboardPoints = [
+  { icon: 'gauge', title: t('dashboard.1.title'), body: t('dashboard.1.body') },
+  { icon: 'clock', title: t('dashboard.2.title'), body: t('dashboard.2.body') },
+  { icon: 'trend', title: t('dashboard.3.title'), body: t('dashboard.3.body') },
+  { icon: 'sparkles', title: t('dashboard.4.title'), body: t('dashboard.4.body') },
+] as const;
+
+const audiences = [
+  { icon: 'utensils', title: t('audience.1.title'), body: t('audience.1.body') },
+  { icon: 'wine', title: t('audience.2.title'), body: t('audience.2.body') },
+  { icon: 'bed', title: t('audience.3.title'), body: t('audience.3.body') },
+  { icon: 'bag', title: t('audience.4.title'), body: t('audience.4.body') },
+] as const;
+
+const packages = [
+  {
+    name: t('pricing.standard.name'),
+    for: t('pricing.standard.for'),
+    featured: false,
+    items: [
+      t('pricing.standard.1'),
+      t('pricing.standard.2'),
+      t('pricing.standard.3'),
+      t('pricing.standard.4'),
+    ],
+  },
+  {
+    name: t('pricing.pro.name'),
+    for: t('pricing.pro.for'),
+    featured: true,
+    items: [t('pricing.pro.1'), t('pricing.pro.2'), t('pricing.pro.3'), t('pricing.pro.4')],
+  },
 ] as const;
 ---
 
 <Hero />
 
-{sections.map((section) => (
-  <Section id={section.id} title={section.title} lead={section.lead} tone={section.tone}>
-    <p class="text-sm italic text-ink-400">{t('placeholder.notice')}</p>
-  </Section>
-))}
+<!-- Problem -->
+<Section id="problem" title={t('problem.title')} lead={t('problem.lead')}>
+  <div class="grid gap-5 sm:grid-cols-3">
+    {problems.map((card) => (
+      <article class="rounded-2xl border border-ink-200 bg-white p-6">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-ink-100 text-ink-700">
+          <Icon name={card.icon} />
+        </span>
+        <h3 class="mt-4 text-lg font-semibold text-ink-900">{card.title}</h3>
+        <p class="mt-2 text-pretty text-ink-500">{card.body}</p>
+      </article>
+    ))}
+  </div>
+</Section>
+
+<!-- How it works -->
+<Section id="how" title={t('how.title')} lead={t('how.lead')}>
+  <ol class="grid gap-5 sm:grid-cols-3">
+    {steps.map((step, i) => (
+      <li class="relative rounded-2xl border border-ink-200 bg-white p-6">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-accent-500/12 text-accent-700">
+            <Icon name={step.icon} />
+          </span>
+          <span class="text-sm font-semibold tabular-nums text-ink-300">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+        </div>
+        <h3 class="mt-4 text-lg font-semibold text-ink-900">{step.title}</h3>
+        <p class="mt-2 text-pretty text-ink-500">{step.body}</p>
+      </li>
+    ))}
+  </ol>
+  <p class="mt-6 text-sm text-ink-500">{t('how.footnote')}</p>
+</Section>
+
+<!-- Privacy -->
+<Section id="privacy" title={t('privacy.title')} lead={t('privacy.lead')} tone="dark">
+  <PrivacyDiagram />
+  <div class="mt-8 grid gap-6 sm:grid-cols-3">
+    {privacyPoints.map((card) => (
+      <div>
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-ink-800 text-accent-400">
+          <Icon name={card.icon} />
+        </span>
+        <h3 class="mt-4 text-lg font-semibold text-ink-100">{card.title}</h3>
+        <p class="mt-2 text-pretty text-ink-300">{card.body}</p>
+      </div>
+    ))}
+  </div>
+  <p class="mt-8 max-w-3xl border-l-2 border-accent-500 pl-5 text-sm text-ink-400">
+    {t('privacy.gdpr')}
+  </p>
+</Section>
+
+<!-- Dashboard -->
+<Section id="dashboard" title={t('dashboard.title')} lead={t('dashboard.lead')}>
+  <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+    <DashboardMock />
+    <dl class="grid gap-6 sm:grid-cols-2">
+      {dashboardPoints.map((card) => (
+        <div>
+          <dt class="flex items-center gap-2.5 text-base font-semibold text-ink-900">
+            <span class="text-accent-600"><Icon name={card.icon} /></span>
+            {card.title}
+          </dt>
+          <dd class="mt-1.5 text-pretty text-ink-500">{card.body}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</Section>
+
+<!-- Audience -->
+<Section id="audience" title={t('audience.title')} lead={t('audience.lead')}>
+  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    {audiences.map((card) => (
+      <article class="rounded-2xl border border-ink-200 bg-white p-6">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-ink-100 text-ink-700">
+          <Icon name={card.icon} />
+        </span>
+        <h3 class="mt-4 text-lg font-semibold text-ink-900">{card.title}</h3>
+        <p class="mt-2 text-pretty text-ink-500">{card.body}</p>
+      </article>
+    ))}
+  </div>
+</Section>
+
+<!-- Pricing -->
+<Section id="pricing" title={t('pricing.title')} lead={t('pricing.lead')}>
+  <div class="grid gap-5 sm:grid-cols-2">
+    {packages.map((pkg) => (
+      <article
+        class:list={[
+          'relative rounded-2xl border p-7',
+          pkg.featured
+            ? 'border-ink-900 bg-white ring-1 ring-ink-900'
+            : 'border-ink-200 bg-white',
+        ]}
+      >
+        {pkg.featured && (
+          <span class="absolute -top-3 right-6 rounded-full bg-ink-900 px-3 py-1 text-xs font-medium text-ink-50">
+            {t('pricing.badge')}
+          </span>
+        )}
+        <h3 class="text-xl font-semibold text-ink-900">{pkg.name}</h3>
+        <p class="mt-1 text-sm text-ink-500">{pkg.for}</p>
+        <p class="mt-5 text-lg font-medium text-ink-900">{t('pricing.price')}</p>
+        <ul class="mt-5 space-y-3">
+          {pkg.items.map((item) => (
+            <li class="flex gap-3 text-ink-700">
+              <span class="mt-0.5 shrink-0 text-accent-600"><Icon name="check" class="h-5 w-5" /></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <a
+          href="#contact"
+          class:list={[
+            'mt-7 block rounded-lg px-5 py-3 text-center font-medium transition-colors',
+            pkg.featured
+              ? 'bg-ink-900 text-ink-50 hover:bg-ink-800'
+              : 'border border-ink-300 text-ink-900 hover:border-ink-400',
+          ]}
+        >
+          {t('pricing.cta')}
+        </a>
+      </article>
+    ))}
+  </div>
+  <p class="mt-6 text-sm text-ink-500">{t('pricing.note')}</p>
+</Section>
+
+<!-- About -->
+<Section id="about" title={t('about.title')}>
+  <div class="max-w-2xl space-y-4 text-lg text-pretty text-ink-500">
+    <p>{t('about.body.1')}</p>
+    <p>{t('about.body.2')}</p>
+  </div>
+</Section>
+
+<!-- Contact -->
+<Section id="contact" title={t('contact.title')} lead={t('contact.lead')} tone="dark">
+  <div class="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
+    <ContactForm />
+    <div>
+      <p class="text-sm uppercase tracking-wider text-ink-400">{t('contact.or')}</p>
+      <div class="mt-4 space-y-3">
+        <a
+          href={CONTACT.whatsapp}
+          rel="noopener noreferrer"
+          target="_blank"
+          class="flex items-center gap-3 rounded-xl border border-ink-700 bg-ink-800/60 px-5 py-4 text-ink-100 transition-colors hover:border-accent-500"
+        >
+          <span class="text-accent-400"><Icon name="whatsapp" /></span>
+          {t('contact.whatsapp')}
+        </a>
+        <a
+          href={`tel:${CONTACT.phone.replace(/\s/g, '')}`}
+          class="flex items-center gap-3 rounded-xl border border-ink-700 bg-ink-800/60 px-5 py-4 text-ink-100 transition-colors hover:border-accent-500"
+        >
+          <span class="text-accent-400"><Icon name="phone" /></span>
+          {CONTACT.phone}
+        </a>
+        <a
+          href={`mailto:${CONTACT.email}`}
+          class="flex items-center gap-3 rounded-xl border border-ink-700 bg-ink-800/60 px-5 py-4 text-ink-100 transition-colors hover:border-accent-500"
+        >
+          <span class="text-accent-400"><Icon name="mail" /></span>
+          {CONTACT.email}
+        </a>
+      </div>
+    </div>
+  </div>
+</Section>

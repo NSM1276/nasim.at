@@ -1,0 +1,69 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { CONTACT } from '../config';
+import { routePath } from '../i18n/routes';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const privacyHref = routePath('privacy', lang);
+
+const field =
+  'mt-1.5 w-full rounded-lg border border-ink-700 bg-ink-800/60 px-4 py-3 text-ink-100 placeholder:text-ink-500 transition-colors focus:border-accent-500 focus:outline-none';
+const label = 'block text-sm font-medium text-ink-300';
+---
+
+<form method="post" action={CONTACT.formEndpoint} class="space-y-5">
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div>
+      <label class={label} for="cf-name">
+        {t('contact.form.name')} <span class="text-accent-400" aria-hidden="true">*</span>
+      </label>
+      <input class={field} id="cf-name" name="name" type="text" required autocomplete="name" />
+    </div>
+    <div>
+      <label class={label} for="cf-venue">
+        {t('contact.form.venue')} <span class="text-accent-400" aria-hidden="true">*</span>
+      </label>
+      <input class={field} id="cf-venue" name="venue" type="text" required autocomplete="organization" />
+    </div>
+  </div>
+
+  <div>
+    <label class={label} for="cf-contact">
+      {t('contact.form.contact')} <span class="text-accent-400" aria-hidden="true">*</span>
+    </label>
+    <input class={field} id="cf-contact" name="contact" type="text" required autocomplete="tel" />
+  </div>
+
+  <div>
+    <label class={label} for="cf-message">{t('contact.form.message')}</label>
+    <textarea
+      class={field}
+      id="cf-message"
+      name="message"
+      rows="4"
+      placeholder={t('contact.form.message.placeholder')}></textarea>
+  </div>
+
+  <label class="flex cursor-pointer items-start gap-3 text-sm text-ink-400">
+    <input
+      type="checkbox"
+      name="consent"
+      required
+      class="mt-0.5 h-4 w-4 shrink-0 rounded border-ink-600 bg-ink-800 accent-accent-500"
+    />
+    <span>
+      {t('contact.form.consent')}
+      <a href={privacyHref} class="ml-1 underline decoration-ink-600 underline-offset-2 hover:text-ink-200">
+        {t('footer.privacy')}
+      </a>
+    </span>
+  </label>
+
+  <button
+    type="submit"
+    class="w-full rounded-lg bg-accent-500 px-6 py-3.5 font-medium text-ink-950 transition-colors hover:bg-accent-400 sm:w-auto"
+  >
+    {t('contact.form.submit')}
+  </button>
+</form>

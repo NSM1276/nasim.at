@@ -1,0 +1,67 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Representative figures for a mid-sized Vienna restaurant. Replaced with real
+// screenshots once the product dashboard exists (WEBSITE_PLAN.md §5).
+const hours = [
+  { h: '11', v: 8 },
+  { h: '12', v: 34 },
+  { h: '13', v: 41 },
+  { h: '14', v: 22 },
+  { h: '15', v: 11 },
+  { h: '16', v: 9 },
+  { h: '17', v: 18 },
+  { h: '18', v: 37 },
+  { h: '19', v: 58 },
+  { h: '20', v: 63 },
+  { h: '21', v: 44 },
+  { h: '22', v: 21 },
+];
+const max = Math.max(...hours.map((x) => x.v));
+---
+
+<div class="rounded-2xl border border-ink-200 bg-white p-4 shadow-xl shadow-ink-900/5 sm:p-6">
+  <div class="grid gap-3 sm:grid-cols-3">
+    <div class="rounded-xl bg-ink-900 p-4 text-ink-50">
+      <p class="text-xs uppercase tracking-wider text-ink-400">{t('mock.now')}</p>
+      <p class="mt-1 text-4xl font-semibold tabular-nums">47</p>
+      <p class="mt-1 flex items-center gap-1.5 text-xs text-accent-300">
+        <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-accent-400"></span>
+        live
+      </p>
+    </div>
+
+    <div class="rounded-xl border border-ink-200 bg-ink-50 p-4">
+      <p class="text-xs uppercase tracking-wider text-ink-400">{t('mock.today')}</p>
+      <p class="mt-1 text-4xl font-semibold tabular-nums text-ink-900">366</p>
+      <p class="mt-1 text-xs font-medium text-accent-700">+12 % {t('mock.vs')}</p>
+    </div>
+
+    <div class="rounded-xl border border-ink-200 bg-ink-50 p-4">
+      <p class="text-xs uppercase tracking-wider text-ink-400">{t('mock.peak')}</p>
+      <p class="mt-1 text-4xl font-semibold tabular-nums text-ink-900">20:00</p>
+      <p class="mt-1 text-xs text-ink-500">63</p>
+    </div>
+  </div>
+
+  <div class="mt-4 rounded-xl border border-ink-200 p-4">
+    <p class="text-xs uppercase tracking-wider text-ink-400">{t('mock.chart')}</p>
+    <div class="mt-4 flex h-32 items-end gap-1 sm:gap-1.5" role="img" aria-label={t('mock.chart')}>
+      {hours.map((bar) => (
+        <div class="flex h-full flex-1 flex-col justify-end gap-1.5">
+          <div
+            class:list={[
+              'w-full rounded-t-sm',
+              bar.v === max ? 'bg-accent-500' : 'bg-ink-200',
+            ]}
+            style={`height: ${Math.round((bar.v / max) * 100)}%`}
+          ></div>
+          <span class="text-center text-[10px] tabular-nums text-ink-400">{bar.h}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
